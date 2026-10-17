@@ -23,6 +23,18 @@ if "--list" in sys.argv:
     for m in client.models.list():
         print(m.name)
     sys.exit()
+    
+if "--scan" in sys.argv:
+    for m in client.models.list():
+        name = m.name.removeprefix("models/")
+        if "gemini" not in name or not ("flash" in name or "lite" in name):
+            continue
+        try:
+            client.models.generate_content(model=name, contents="Say hi.")
+            print("OK    ", name)
+        except Exception as exc:
+            print("FAILED", name, "-", str(exc)[:60])
+    sys.exit()
 
 model = sys.argv[1] if len(sys.argv) > 1 else os.getenv("TRAVEL_MODEL", "gemini-3.8-flash")
 print(f"Testing model: {model}")
