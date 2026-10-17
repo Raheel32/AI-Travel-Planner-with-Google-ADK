@@ -1,0 +1,5 @@
+google-adk>=1.16,<3
+httpx
+pydantic>=2
+python-dotenv
+pytest
