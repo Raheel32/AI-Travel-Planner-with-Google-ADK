@@ -12,7 +12,7 @@ load_dotenv()  # finds travel_planner/.env automatically
 # errors (503 "high demand", 429 rate limits) are retried automatically with
 # growing waits (2s, 4s, 8s, ...) instead of failing the whole chat.
 MODEL = Gemini(
-    model=os.getenv("TRAVEL_MODEL", "gemini-3.8-flash"),
+    model=os.getenv("TRAVEL_MODEL", "Gemini 3.8 Flash Lite TTS"),
     retry_options=types.HttpRetryOptions(attempts=5, initial_delay=2, max_delay=30, exp_base=2),
 )
 
