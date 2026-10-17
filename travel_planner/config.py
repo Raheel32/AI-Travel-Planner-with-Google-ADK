@@ -3,10 +3,18 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
+from google.adk.models import Gemini
+from google.genai import types
 
 load_dotenv()  # finds travel_planner/.env automatically
 
-MODEL = os.getenv("TRAVEL_MODEL", "gemini-2.5-flash")
+# The model every agent uses. Wrapped in ADK's Gemini class so temporary Google
+# errors (503 "high demand", 429 rate limits) are retried automatically with
+# growing waits (2s, 4s, 8s, ...) instead of failing the whole chat.
+MODEL = Gemini(
+    model=os.getenv("TRAVEL_MODEL", "gemini-3.8-flash"),
+    retry_options=types.HttpRetryOptions(attempts=5, initial_delay=2, max_delay=30, exp_base=2),
+)
 
 # "mock" = fake but realistic data, no keys needed.  "serpapi" = real prices.
 DATA_PROVIDER = os.getenv("TRAVEL_DATA_PROVIDER", "mock").strip().lower()
