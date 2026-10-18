@@ -14,10 +14,13 @@ from .flight_agent import flight_agent
 from .hotel_agent import hotel_agent
 from .itinerary_agent import itinerary_agent
 
-# Step 1 of the pipeline: three independent researchers run at the same time.
-research_team = ParallelAgent(
+# Step 1 of the pipeline: three independent researchers.
+# Parallel = all at once (fast, but bursts of model calls can hit free-tier per-minute limits).
+# Sequential = one after another (slower, gentler). Chosen by TRAVEL_PARALLEL_RESEARCH in .env.
+_research_class = ParallelAgent if config.PARALLEL_RESEARCH else SequentialAgent
+research_team = _research_class(
     name="research_team",
-    description="Runs flight, hotel and destination research in parallel.",
+    description="Runs flight, hotel and destination research.",
     sub_agents=[flight_agent, hotel_agent, destination_agent],
 )
 
