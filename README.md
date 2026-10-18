@@ -1,3 +1,10 @@
+
+<p align="center">
+  <img src="./assets/AI%20Travel%20Planner%20Banner.png"
+       alt="AI Travel Planner with Google ADK"
+       width="100%">
+</p>
+
 # AI Travel Planner with Google ADK
 
 A multi-agent trip planner: you chat with a **Travel Coordinator**; a team of specialist agents
