@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="./assets/AI%20Travel%20Planner%20Banner.png"
+  <img src="travel_planner/assets/AI Travel Planner Banner.png"
        alt="AI Travel Planner with Google ADK"
        width="100%">
 </p>
